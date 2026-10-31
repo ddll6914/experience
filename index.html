@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비전공자 시각편집디자이너 취업 플랜</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --bg2: #1a1a24;
+    --bg3: #22222f;
+    --accent1: #7c5cfc;
+    --accent2: #e040fb;
+    --accent3: #00e5ff;
+    --text: #f0eeff;
+    --muted: #9b97b8;
+    --card: #1e1e2e;
+    --border: rgba(124,92,252,0.25);
+    --success: #4ade80;
+    --warning: #facc15;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    padding: 80px 40px 60px;
+    background: linear-gradient(135deg, #12121e 0%, #1a1030 50%, #0d1a2a 100%);
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 50%, rgba(124,92,252,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 400px 300px at 80% 30%, rgba(224,64,251,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 500px 350px at 50% 100%, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(124,92,252,0.2);
+    border: 1px solid rgba(124,92,252,0.5);
+    color: #b09fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #fff 0%, #c8b8ff 40%, #e040fb 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+
+  /* ─── PROFILE CARD ─── */
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .profile-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .profile-item:hover { transform: translateY(-3px); border-color: rgba(124,92,252,0.5); }
+  .profile-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .profile-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ─── SECTION TITLE ─── */
+  .sec-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .sec-title span {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sec-desc { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+  /* ─── PHASE BLOCKS ─── */
+  .phase-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .phase1::before { background: linear-gradient(90deg, var(--accent1), var(--accent3)); }
+  .phase2::before { background: linear-gradient(90deg, var(--accent3), var(--success)); }
+  .phase3::before { background: linear-gradient(90deg, var(--success), var(--accent2)); }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .phase-num {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900;
+    flex-shrink: 0;
+  }
+  .ph1 { background: rgba(124,92,252,0.2); color: var(--accent1); }
+  .ph2 { background: rgba(0,229,255,0.15); color: var(--accent3); }
+  .ph3 { background: rgba(74,222,128,0.15); color: var(--success); }
+
+  .phase-title-area h3 { font-size: 20px; font-weight: 700; }
+  .phase-title-area p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .phase-months {
+    margin-left: auto;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .course-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s;
+  }
+  .course-card:hover {
+    background: rgba(124,92,252,0.1);
+    border-color: rgba(124,92,252,0.3);
+    transform: translateY(-2px);
+  }
+  .course-num {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    color: var(--accent1); margin-bottom: 6px;
+  }
+  .course-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .course-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .course-tag {
+    display: inline-block;
+    margin-top: 8px;
+    background: rgba(124,92,252,0.15);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: #b09fff;
+  }
+
+  .phase-tip {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #80dfff;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 8px;
+  }
+  .phase-tip .icon { flex-shrink: 0; font-size: 16px; }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    margin-top: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .tl-month {
+    padding: 20px 16px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .tl-month:last-child { border-right: none; }
+  .tl-month:hover { background: rgba(124,92,252,0.07); }
+  .tl-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .tl-course {
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 7px 6px;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .tl-c1 { background: rgba(124,92,252,0.2); color: #c4b0ff; }
+  .tl-c2 { background: rgba(0,229,255,0.15); color: #80dfff; }
+  .tl-c3 { background: rgba(224,64,251,0.15); color: #f0a0ff; }
+  .tl-c4 { background: rgba(74,222,128,0.15); color: #86efac; }
+
+  /* ─── PRIORITY LIST ─── */
+  .priority-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .priority-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+  }
+  .badge-must { background: rgba(124,92,252,0.2); color: var(--accent1); }
+  .badge-rec { background: rgba(250,204,21,0.15); color: var(--warning); }
+  .badge-opt { background: rgba(74,222,128,0.15); color: var(--success); }
+
+  .priority-list { list-style: none; }
+  .priority-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .priority-list li:last-child { border-bottom: none; }
+  .p-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .pn-must { background: rgba(124,92,252,0.25); color: var(--accent1); }
+  .pn-rec  { background: rgba(250,204,21,0.2); color: var(--warning); }
+  .pn-opt  { background: rgba(74,222,128,0.2); color: var(--success); }
+
+  /* ─── ADVICE CARDS ─── */
+  .advice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .advice-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .advice-card:hover { transform: translateY(-4px); }
+  .advice-icon { font-size: 28px; margin-bottom: 12px; }
+  .advice-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .advice-content { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .advice-highlight {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ─── CTA ─── */
+  .cta {
+    background: linear-gradient(135deg, rgba(124,92,252,0.2) 0%, rgba(224,64,251,0.15) 50%, rgba(0,229,255,0.1) 100%);
+    border: 1px solid rgba(124,92,252,0.3);
+    border-radius: 24px;
+    padding: 48px 40px;
+    text-align: center;
+    margin: 0 0 60px;
+  }
+  .cta h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .cta p { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+  .cta-steps {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .cta-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .cta-arrow { color: var(--muted); font-size: 18px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .priority-grid { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: repeat(3, 1fr); }
+    .tl-month:nth-child(3) { border-right: none; }
+    .tl-month:nth-child(3) ~ .tl-month { border-top: 1px solid rgba(255,255,255,0.06); }
+    .cta { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">SBS아카데미컴퓨터아트학원 홍대점</div>
+  <h1>비전공자<br>시각편집디자이너<br>취업 플랜</h1>
+  <p class="hero-sub">포토샵/일러스트 기초 → 브랜딩 포트폴리오 완성 → 6개월 취업</p>
+  <div class="hero-stats">
+    <div class="stat-pill"><div class="stat-dot" style="background:#7c5cfc"></div>6개월 풀타임</div>
+    <div class="stat-pill"><div class="stat-dot" style="background:#e040fb"></div>브랜딩/아이덴티티</div>
+    <div class="stat-pill"><div class="stat-dot" style="background:#00e5ff"></div>하루 6시간+</div>
+    <div class="stat-pill"><div class="stat-dot" style="background:#4ade80"></div>비전공자 가능</div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="container">
+  <section class="fade-in">
+    <div class="sec-title">대상자 <span>프로파일</span></div>
+    <div class="sec-desc">인터뷰 기반 맞춤 분석 결과</div>
+    <div class="profile-grid">
+      <div class="profile-item">
+        <div class="profile-label">현황</div>
+        <div class="profile-value">취업준비생 (비전공자)</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-label">툴 경험</div>
+        <div class="profile-value">포토샵 / 일러스트 기초</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-label">목표 직무</div>
+        <div class="profile-value">시각디자인 (인쇄/디지털)</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-label">포트폴리오 방향</div>
+        <div class="profile-value">브랜딩 / 아이덴티티</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-label">취업 목표</div>
+        <div class="profile-value">6개월 이내</div>
+      </div>
+      <div class="profile-item">
+        <div class="profile-label">학습 시간</div>
+        <div class="profile-value">풀타임 (하루 6시간+)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASES -->
+  <section class="fade-in">
+    <div class="sec-title"><span>3단계</span> 수강 로드맵</div>
+    <div class="sec-desc">기초 → 실무 → 포트폴리오 완성의 체계적 흐름</div>
+
+    <!-- Phase 1 -->
+    <div class="phase-block phase1 fade-in">
+      <div class="phase-header">
+        <div class="phase-num ph1">1</div>
+        <div class="phase-title-area">
+          <h3>툴 심화</h3>
+          <p>기초가 있으므로 심화 과정 바로 진입 가능</p>
+        </div>
+        <div class="phase-months">1~2개월</div>
+      </div>
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-num">① 필수</div>
+          <div class="course-name">포토웍스</div>
+          <div class="course-desc">포토샵 심화 실습 — 실무 작업 퀄리티 즉시 향상</div>
+          <span class="course-tag">포토샵 심화</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">② 필수</div>
+          <div class="course-name">디일러</div>
+          <div class="course-desc">일러스트 심화 그래픽 드로잉 — 브랜딩/로고/벡터 핵심</div>
+          <span class="course-tag">일러스트 심화</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">③ 병행</div>
+          <div class="course-name">AI프롬프트1</div>
+          <div class="course-desc">뤼튼/GPT 자격증 취득 + GPT 활용 능력</div>
+          <span class="course-tag">자격증</span>
+        </div>
+      </div>
+      <div class="phase-tip">
+        <div class="icon">💡</div>
+        <div>AI프롬프트1을 병행하면 <strong>뤼튼 AI 자격증</strong>을 조기 취득할 수 있어 채용 시장에서 즉각적인 차별화가 가능합니다.</div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-block phase2 fade-in">
+      <div class="phase-header">
+        <div class="phase-num ph2">2</div>
+        <div class="phase-title-area">
+          <h3>실무 디자인 경험</h3>
+          <p>툴을 익힌 후 실제 결과물 제작 훈련</p>
+        </div>
+        <div class="phase-months">3~4개월</div>
+      </div>
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-num">③ 필수</div>
+          <div class="course-name">어드밴스디자인</div>
+          <div class="course-desc">배너·포스터·상세페이지 실무 → 포트폴리오 소스 확보</div>
+          <span class="course-tag">실무 디자인</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">④ 강추</div>
+          <div class="course-name">AI크리에이터 시각편집</div>
+          <div class="course-desc">GPT/미드저니/런웨이 AI+디자인 융합 → 채용 경쟁력 핵심</div>
+          <span class="course-tag">AI 융합</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">+ 선택</div>
+          <div class="course-name">AI프롬프트2</div>
+          <div class="course-desc">미드저니로 브랜딩 시각 소스 생성 자동화</div>
+          <span class="course-tag">미드저니</span>
+        </div>
+      </div>
+      <div class="phase-tip">
+        <div class="icon">🎯</div>
+        <div>어드밴스디자인에서 만든 결과물이 <strong>포트폴리오 핵심 소스</strong>가 됩니다. AI 툴과 결합하면 2025년 채용 기준에 맞는 경쟁력을 확보할 수 있습니다.</div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-block phase3 fade-in">
+      <div class="phase-header">
+        <div class="phase-num ph3">3</div>
+        <div class="phase-title-area">
+          <h3>포트폴리오 완성</h3>
+          <p>취업 직전 집중 포폴 제작</p>
+        </div>
+        <div class="phase-months">5~6개월</div>
+      </div>
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-num">⑤ 필수</div>
+          <div class="course-name">편집포폴1</div>
+          <div class="course-desc">방향 설정, 컨셉 기획 → 포폴 구조 설계</div>
+          <span class="course-tag">기획/컨셉</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">⑥ 필수</div>
+          <div class="course-name">편집포폴2</div>
+          <div class="course-desc">실제 포폴 제작 → 완성본 완성</div>
+          <span class="course-tag">포폴 완성</span>
+        </div>
+        <div class="course-card">
+          <div class="course-num">⑦ 옵션</div>
+          <div class="course-name">포폴디렉터</div>
+          <div class="course-desc">어드밴스+포폴 활용 설계 디렉팅 → 취업용 완성도 극대화</div>
+          <span class="course-tag">디렉팅</span>
+        </div>
+      </div>
+      <div class="phase-tip">
+        <div class="icon">🏆</div>
+        <div>목표: <strong>브랜딩 3~5개 케이스스터디</strong> (로고 + 어플리케이션 세트). 포폴에 AI 툴 활용 작업을 반드시 포함하세요.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="fade-in">
+    <div class="sec-title">월별 <span>타임라인</span></div>
+    <div class="sec-desc">6개월 상세 실행 일정</div>
+    <div class="timeline">
+      <div class="tl-month">
+        <div class="tl-label">1월</div>
+        <div class="tl-course tl-c1">포토웍스</div>
+        <div class="tl-course tl-c2">AI프롬프트1</div>
+      </div>
+      <div class="tl-month">
+        <div class="tl-label">2월</div>
+        <div class="tl-course tl-c1">디일러</div>
+      </div>
+      <div class="tl-month">
+        <div class="tl-label">3월</div>
+        <div class="tl-course tl-c3">어드밴스디자인</div>
+      </div>
+      <div class="tl-month">
+        <div class="tl-label">4월</div>
+        <div class="tl-course tl-c3">어드밴스디자인 마무리</div>
+        <div class="tl-course tl-c2">AI크리에이터 시각편집</div>
+      </div>
+      <div class="tl-month">
+        <div class="tl-label">5월</div>
+        <div class="tl-course tl-c4">편집포폴1</div>
+      </div>
+      <div class="tl-month">
+        <div class="tl-label">6월</div>
+        <div class="tl-course tl-c4">편집포폴2</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIORITY -->
+  <section class="fade-in">
+    <div class="sec-title">과목 <span>우선순위</span></div>
+    <div class="sec-desc">목표 달성을 위한 최적 수강 구성</div>
+    <div class="priority-grid">
+      <div class="priority-card">
+        <span class="priority-badge badge-must">✅ 필수 — 6개월 핵심</span>
+        <ul class="priority-list">
+          <li><div class="p-num pn-must">1</div>포토웍스</li>
+          <li><div class="p-num pn-must">2</div>디일러</li>
+          <li><div class="p-num pn-must">3</div>어드밴스디자인</li>
+          <li><div class="p-num pn-must">4</div>편집포폴1</li>
+          <li><div class="p-num pn-must">5</div>편집포폴2</li>
+        </ul>
+      </div>
+      <div>
+        <div class="priority-card" style="margin-bottom:16px">
+          <span class="priority-badge badge-rec">💡 강력 추천 — 채용 경쟁력</span>
+          <ul class="priority-list">
+            <li><div class="p-num pn-rec">6</div>AI프롬프트1 (자격증)</li>
+            <li><div class="p-num pn-rec">7</div>AI크리에이터 시각편집</li>
+          </ul>
+        </div>
+        <div class="priority-card">
+          <span class="priority-badge badge-opt">➕ 시간 여유 시 추가</span>
+          <ul class="priority-list">
+            <li><div class="p-num pn-opt">8</div>AI프롬프트2</li>
+            <li><div class="p-num pn-opt">9</div>포폴디렉터</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVICE -->
+  <section class="fade-in">
+    <div class="sec-title">현실적 <span>조언</span></div>
+    <div class="sec-desc">6개월 취업 달성을 위한 핵심 포인트</div>
+    <div class="advice-grid">
+      <div class="advice-card">
+        <div class="advice-icon">🟢</div>
+        <div class="advice-title">6개월 달성 가능성</div>
+        <div class="advice-content">
+          풀타임 학습 + 포토샵/일러스트 기초가 이미 있으므로<br>
+          <span class="advice-highlight">6개월 취업은 충분히 달성 가능</span>합니다.
+          심화 과정 바로 진입 가능한 상태입니다.
+        </div>
+      </div>
+      <div class="advice-card">
+        <div class="advice-icon">📁</div>
+        <div class="advice-title">포트폴리오 목표</div>
+        <div class="advice-content">
+          <span class="advice-highlight">브랜딩 3~5개 케이스스터디</span>를 목표로 하세요.
+          로고 + 어플리케이션 세트 구성이 가장 강력합니다.
+          AI 툴 활용 작업은 반드시 포함해야 합니다.
+        </div>
+      </div>
+      <div class="advice-card">
+        <div class="advice-icon">🏢</div>
+        <div class="advice-title">취업처 방향</div>
+        <div class="advice-content">
+          · <span class="advice-highlight">디자인 에이전시</span> (경험 쌓기 최적)<br>
+          · <span class="advice-highlight">중소 브랜드 인하우스</span><br>
+          · 프리랜서 플랫폼 <span class="advice-highlight">(크몽)</span> — 병행 가능
+        </div>
+      </div>
+      <div class="advice-card">
+        <div class="advice-icon">📜</div>
+        <div class="advice-title">자격증 전략</div>
+        <div class="advice-content">
+          <span class="advice-highlight">뤼튼 AI 자격증</span>: AI프롬프트1에서 취득<br>
+          <span class="advice-highlight">GTQ 포토샵</span>: 별도 독학 추천<br>
+          둘 다 취업 서류에서 즉시 차별화됩니다.
+        </div>
+      </div>
+      <div class="advice-card">
+        <div class="advice-icon">🤖</div>
+        <div class="advice-title">AI 역량 필수화</div>
+        <div class="advice-content">
+          2025년 이후 채용 기준이 변화 중입니다.<br>
+          AI 툴 활용 능력을 <span class="advice-highlight">포트폴리오에 반드시 포함</span>해야<br>
+          서류·면접 경쟁력이 확보됩니다.
+        </div>
+      </div>
+      <div class="advice-card">
+        <div class="advice-icon">⚡</div>
+        <div class="advice-title">학습 속도 팁</div>
+        <div class="advice-content">
+          수업 후 <span class="advice-highlight">당일 복습 + 개인 작업</span>을 병행하세요.
+          SNS(인스타/비핸스)에 작업물을 꾸준히 올리면
+          취업 전에 팔로워 기반 포트폴리오가 완성됩니다.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta fade-in">
+    <h2>지금 바로 시작하세요</h2>
+    <p>6개월 후 디자이너로 취업하는 로드맵이 완성되었습니다</p>
+    <div class="cta-steps">
+      <div class="cta-step">① 수강 과목 최종 확인</div>
+      <div class="cta-arrow">→</div>
+      <div class="cta-step">② 월별 로드맵 확정 + 학원 등록</div>
+      <div class="cta-arrow">→</div>
+      <div class="cta-step">③ 브랜딩 포폴 브리프 작성</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  SBS아카데미컴퓨터아트학원 홍대점 · AI 비서 시스템 생성
+</footer>
+
+<script>
+  // Scroll fade-in animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Stagger child cards
+  document.querySelectorAll('.profile-grid, .course-grid, .advice-grid').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.transitionDelay = `${i * 60}ms`;
+    });
+  });
+</script>
+</body>
+</html>
